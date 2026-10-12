@@ -191,3 +191,7 @@ update checks, no remote schemas.
 ## License
 
 [MIT](LICENSE)
+
+The logo (`site/static/favicon.svg`) is not under the MIT license: its camel is
+["Camel" by Delapouite](https://game-icons.net/1x1/delapouite/camel.html), used under
+[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), recolored and set on a rounded square.

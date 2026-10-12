@@ -230,6 +230,18 @@ run("the built site", () => {
     ).toEqual([expect.stringContaining("needs a reason")])
   })
 
+  it("shows the favicon's drawing next to the name, and the favicon names its author and license", () => {
+    const favicon = page("favicon.svg")
+    const drawing = / d="([^"]+)"/.exec(favicon)?.[1]
+    expect(drawing?.length).toBeGreaterThan(100)
+    const mark = /<svg class="?brand-mark"?[^>]*><path d="?([^">]+)"?/.exec(page("index.html"))?.[1]
+    // The same numbers: the HTML minifier may write them differently.
+    const numbers = (d = "") => (d.match(/-?\d*\.?\d+/g) ?? []).map(Number)
+    expect(numbers(mark)).toEqual(numbers(drawing))
+    expect(favicon).toContain("Delapouite")
+    expect(favicon).toContain("https://creativecommons.org/licenses/by/3.0/")
+  })
+
   it("the declaration rules catch a REPL transcript that names missing code, and code on another kind", () => {
     const missing = page("index.html").replace(/data-code="?server"?/, 'data-code="other"')
     expect(declarationProblems(collectBlocks(siteView(dir, { "index.html": missing })))).toEqual([
@@ -630,6 +642,18 @@ run("each check:site rule catches its problem", () => {
         ),
       }),
       /orchesta\.io opens a new tab without saying so/,
+    ],
+    [
+      "the logo without its author's name",
+      () => ({ "index.html": home().replaceAll("Delapouite", "someone") }),
+      /shows the logo without its credit/,
+    ],
+    [
+      "the logo without the link to its license",
+      () => ({
+        "index.html": home().replaceAll("https://creativecommons.org/licenses/by/3.0/", "/"),
+      }),
+      /shows the logo without its credit/,
     ],
     [
       "a home page example that is no longer replayed (the REPL block lost its check)",

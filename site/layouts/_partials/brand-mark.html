@@ -1,0 +1,11 @@
+{{- /*
+  The logo next to the site's name: the camel of static/favicon.svg (the one source of the
+  drawing; its license and author are in that file and in the footer), on the accent color.
+  Decorative: the name next to it is the link's text.
+*/ -}}
+{{- $file := "static/favicon.svg" -}}
+{{- if not (fileExists $file) }}{{ errorf "site/%s is missing" $file }}{{ end -}}
+{{- $found := findRESubmatch ` d="([^"]+)"` (readFile $file) 1 -}}
+{{- if not $found }}{{ errorf "site/%s has no path" $file }}{{ end -}}
+<svg class="brand-mark" viewBox="-28 -24 568 560" aria-hidden="true" focusable="false"><path d="{{ index (index $found 0) 1 }}"/></svg>
+{{- /* */ -}}

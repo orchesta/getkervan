@@ -897,6 +897,21 @@ export function checkBuild(view, params, options = {}) {
       )
   }
 
+  // The logo's camel is under CC BY 3.0, which asks for the credit wherever it is shown: every page
+  // with the mark names the author and links to the work and to the license (the footer).
+  for (const file of [...view.files].filter((name) => name.endsWith(".html")).sort()) {
+    const html = view.text(file)
+    if (!/class="?brand-mark"?/.test(html)) continue
+    const credited =
+      html.includes("Delapouite") &&
+      html.includes("https://game-icons.net/1x1/delapouite/camel.html") &&
+      html.includes("https://creativecommons.org/licenses/by/3.0/")
+    if (!credited)
+      errors.push(
+        `/${file.replace(/index\.html$/, "")}: shows the logo without its credit (author, work and license links; CC BY 3.0).`,
+      )
+  }
+
   // The home page's example is verified, not only shown: the same tool in TypeScript and as a spec,
   // and a REPL transcript that names both, which `site:verify --examples` replays against each
   // (docs/SITE.md). Here, without running anything: both define the tool the transcript lists.

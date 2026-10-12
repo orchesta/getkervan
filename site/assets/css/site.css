@@ -245,11 +245,8 @@ hr {
   height: 1.5rem;
   border-radius: 6px;
   background: var(--k-accent);
-  color: var(--k-accent-fg);
-  display: inline-grid;
-  place-items: center;
-  font-size: 0.85rem;
-  font-weight: 800;
+  fill: var(--k-accent-fg);
+  flex: none;
 }
 
 .site-nav ul {
@@ -1414,6 +1411,10 @@ figcaption {
   margin-top: 2rem;
   font-size: 0.85rem;
   color: var(--k-fg-subtle);
+}
+
+.site-footer .fine + .fine {
+  margin-top: 0.4rem;
 }
 
 @media (max-width: 40rem) {

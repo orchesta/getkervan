@@ -35,6 +35,7 @@ Nothing that exists elsewhere in the repository is copied into `site/` by hand. 
 | The home page's one-glance flow | `site/layouts/_partials/flow.html`: two inline SVGs of the same flow (wide and tall), colored by the tokens |
 | "Tools in TypeScript" | `examples/calculator/src/calculator.ts`, a workspace example with its own test (mounted; the `code-file` shortcode shows it) |
 | The package diagram ("How Kervan works") | `site/layouts/_partials/diagram.html`, one inline SVG colored by the tokens |
+| The logo (favicon, and the mark next to the name in the header) | `site/static/favicon.svg`: the camel is "Camel" by Delapouite (game-icons.net), CC BY 3.0, recolored on the accent square; the header reads its path from that file (`_partials/brand-mark.html`), and the footer and the README carry the credit the license asks for |
 | The Orchesta logo in the footer | `site/static/img/orchesta-logo-*.webp` (158x32 and 159x32, shown at 79x16: sharp on 2x screens), one per theme |
 | `tools/list`, `server/discover` and the two tool calls | `site/data/generated/example.json`, written by `pnpm site:generate` from a real `kervan run --http` |
 | The `kervan.yaml` reference | `packages/spec-runtime/schema/kervan.schema.json`, rendered at build time |
@@ -215,7 +216,8 @@ CSS or script file.
 For the site: `sitemap.xml` lists exactly the canonical pages, with `lastmod` from git (a warning when one is missing);
 `robots.txt` allows everything and names the sitemap; `_headers` has the CSP and the other
 headers, HSTS of at least a year, and `noindex` for the `*.pages.dev` preview hosts and only for them;
-no canonical link on the 404 page; the performance budget; the framework
+no canonical link on the 404 page; the performance budget; the logo's credit (author, work and
+license links) on every page that shows the logo; the framework
 book never mentions Studio except the one line pointing to its docs, and each of its pages has a
 "Where this fits" line; the home page's example is a TypeScript block, a spec block and a REPL transcript that runs
 both (so `site:verify --examples` checks the output), and both define the tool the transcript lists, no Studio screenshot in its first screen (the
@@ -283,6 +285,7 @@ Every claim on the landing page, and what backs it. When a claim changes, change
 | YAML or TypeScript, on the official MCP SDK; both get the same checks | the "official MCP SDK" and "Both kinds of tool" rows below |
 | Current MCP: the stateless 2026-07-28 revision, and 2025 clients from the same app | the "MCP 2026-07-28" row below |
 | Studio: a self-hosted web UI to manage servers, secrets, users and logs; the framework works without it | `apps/studio` (the Studio rows below); the framework packages do not depend on it (`apps/studio` is private; no package lists it as a dependency, and the CLI only forwards `kervan studio` to a Studio installed in the project) |
+| Logo: "Camel" by Delapouite, under CC BY 3.0; recolored and set on a square (the footer) | the icon's page on game-icons.net names the author and the license; `site/static/favicon.svg` has the same note |
 | Built by Orchesta (the footer) | the repository is `orchesta/getkervan` (root `package.json`); the logo files are Orchesta's own, served from this site |
 | On the official MCP SDK, not a rewrite | `@modelcontextprotocol/server`, `/client`, `/hono` dependencies (`packages/*/package.json`) |
 | MCP 2026-07-28, stateless; `server/discover`; 2025 clients served too | `packages/transport`; both eras in `packages/transport/test` (`http`, `stdio`, `testing`); the landing page's `server/discover` output is a real answer |
