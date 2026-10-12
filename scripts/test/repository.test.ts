@@ -88,11 +88,12 @@ describe("the repository address", () => {
 describe("the published packages", () => {
   const manifests = PUBLISHED.map((dir) => ({ dir, manifest: json(`${dir}/package.json`) }))
 
-  it("share one version and are published to the next tag, publicly", () => {
+  it("share one version and are published publicly, a pre-release to next and a release to latest", () => {
     const versions = new Set(manifests.map(({ manifest }) => manifest.version))
     expect(versions.size).toBe(1)
     for (const { dir, manifest } of manifests) {
-      expect(manifest.publishConfig, dir).toEqual({ access: "public", tag: "next" })
+      const tag = manifest.version.includes("-") ? "next" : "latest"
+      expect(manifest.publishConfig, dir).toEqual({ access: "public", tag })
       expect(manifest.license, dir).toBe("MIT")
       expect(manifest.private, dir).toBeUndefined()
     }

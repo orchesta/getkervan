@@ -12,10 +12,10 @@ first release showed is recorded in [rc.1: step by step](#rc1-step-by-step), as 
 ## Ready in the repository
 
 - **Package metadata.** The five published packages (`@kervan/core`, `@kervan/transport`,
-  `@kervan/spec-runtime`, `kervan`, `create-kervan`) share one version (`0.1.0-rc.2` now), and
+  `@kervan/spec-runtime`, `kervan`, `create-kervan`) share one version (`0.1.0` now), and
   each has `repository` (this repository, with its `directory`), `bugs`, `homepage`
   (`https://getkervan.dev`), `author` ("Kervan contributors", no email), `license` (MIT),
-  `publishConfig` (`access: public`, `tag: next`) and a `files` allow list without sources, tests
+  `publishConfig` (`access: public`; `tag: latest`, or `next` while the version is a pre-release) and a `files` allow list without sources, tests
   or source maps. The repository address is written once in the root `package.json`;
   `scripts/test/repository.test.ts` checks the packages, the site's `params.repoURL`, CODEOWNERS,
   the issue template, SECURITY.md, CONTRIBUTING.md and README.md against it.
@@ -507,8 +507,9 @@ After the first release (above), every release:
    update it with anything new.
 2. A pull request sets the new version in all five `package.json` files (one version for all;
    `scripts/test/repository.test.ts` fails otherwise) and updates the release notes. A
-   pre-release keeps `publishConfig.tag: next`; for a release under `latest` the workflow's
-   dist-tag input decides (the command line's `--tag` wins over `publishConfig`). CI is green,
+   pre-release has `publishConfig.tag: next`, a release `latest` (`repository.test.ts` checks it
+   against the version); the workflow's dist-tag input must say the same (the command line's
+   `--tag` wins over `publishConfig`). CI is green,
    `pnpm test:pack` passes; it is merged.
 3. On the `release` environment (never as a repository or organization variable),
    `KERVAN_ALLOW_PUBLISH` = `1`.

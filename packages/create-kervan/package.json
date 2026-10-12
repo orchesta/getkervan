@@ -1,6 +1,6 @@
 {
   "name": "create-kervan",
-  "version": "0.1.0-rc.2",
+  "version": "0.1.0",
   "description": "Create a Kervan MCP server project: npm create kervan.",
   "keywords": [
     "mcp",
@@ -36,7 +36,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "tag": "next"
+    "tag": "latest"
   },
   "scripts": {
     "check:pack": "publint",
