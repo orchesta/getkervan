@@ -1,18 +1,24 @@
 {{- /*
   The Open Graph image of a page, drawn at build time (1200x630 PNG): the site's dark surface and
-  amber bar (assets/og/base.png), the brand, the page's section and its title. Nothing external.
+  amber bar (assets/og/base.png), the logo (assets/og/mark.png, drawn from the favicon by
+  scripts/site/og-mark.mjs) and the name, the page's section and its title, and the logo's credit
+  (CC BY 3.0 asks for it wherever the logo shows). Nothing external.
 */ -}}
 {{- $base := resources.Get "og/base.png" -}}
+{{- $mark := resources.Get "og/mark.png" -}}
+{{- if not $mark }}{{ errorf "site/assets/og/mark.png is missing: node scripts/site/og-mark.mjs" }}{{ end -}}
 {{- $title := .Title | default site.Title -}}
 {{- if .IsHome }}{{ $title = "MCP servers from a YAML spec or TypeScript" }}{{ end -}}
 {{- if eq .Kind "404" }}{{ $title = "Page not found" }}{{ end -}}
 {{- $section := "" -}}
 {{- with .Params.ogSection }}{{ $section = . }}{{ else }}{{ with .Section }}{{ $section = . | humanize }}{{ end }}{{ end -}}
 {{- $filters := slice
-  (images.Text "Kervan" (dict "color" "#f59e0b" "size" 44 "x" 80 "y" 70))
+  (images.Overlay $mark 80 52)
+  (images.Text "Kervan" (dict "color" "#f59e0b" "size" 44 "x" 188 "y" 70))
   (images.Text $section (dict "color" "#b8b2ac" "size" 30 "x" 80 "y" 150))
   (images.Text $title (dict "color" "#f5f5f4" "size" 66 "linespacing" 10 "x" 80 "y" 230))
   (images.Text "getkervan.dev" (dict "color" "#918a83" "size" 28 "x" 80 "y" 545))
+  (images.Text "Logo: Camel by Delapouite, CC BY 3.0" (dict "color" "#918a83" "size" 20 "x" 800 "y" 553))
 -}}
 {{- $img := $base | images.Filter $filters -}}
 {{- $name := printf "og/%s.png" (cond .IsHome "home" (cond (eq .Kind "404") "404" (.RelPermalink | strings.TrimPrefix "/" | strings.TrimSuffix "/" | replaceRE "/" "-"))) -}}

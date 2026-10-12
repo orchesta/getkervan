@@ -192,6 +192,7 @@ update checks, no remote schemas.
 
 [MIT](LICENSE)
 
-The logo (`site/static/favicon.svg`) is not under the MIT license: its camel is
+The logo (`site/static/favicon.svg`, also the mark in Kervan Studio and on the site's preview
+images) is not under the MIT license: its camel is
 ["Camel" by Delapouite](https://game-icons.net/1x1/delapouite/camel.html), used under
 [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), recolored and set on a rounded square.

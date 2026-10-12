@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 import { type ReactNode, useEffect, useState } from "react"
 import type { User } from "../api.js"
+import { BrandMark, LogoCredit } from "../ui/BrandMark.js"
 import { Button } from "../ui/Button.js"
 import { cn } from "../ui/cn.js"
 import { type ThemeChoice, ThemeToggle } from "../ui/ThemeToggle.js"
@@ -38,12 +39,7 @@ const NAV: NavItem[] = [
 function Brand() {
   return (
     <a href="#/" className="flex items-center gap-2.5 text-fg no-underline hover:no-underline">
-      <span
-        aria-hidden="true"
-        className="flex size-7 items-center justify-center rounded-md bg-accent text-sm font-bold text-accent-fg"
-      >
-        K
-      </span>
+      <BrandMark className="size-7" />
       <span className="text-sm font-semibold tracking-tight">Kervan Studio</span>
     </a>
   )
@@ -109,6 +105,7 @@ function Navigation(props: {
             <LogOut className="size-4" aria-hidden="true" />
           </Button>
         </div>
+        <LogoCredit className="px-1" />
       </div>
     </div>
   )

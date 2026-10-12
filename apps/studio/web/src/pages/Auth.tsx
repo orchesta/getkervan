@@ -1,6 +1,7 @@
 import { type FormEvent, type ReactNode, useState } from "react"
 import { api, setCsrfToken, type User } from "../api.js"
 import { ErrorText } from "../components/untrusted.js"
+import { BrandMark, LogoCredit } from "../ui/BrandMark.js"
 import { Button } from "../ui/Button.js"
 import { Card } from "../ui/Card.js"
 import { Field, Input } from "../ui/Field.js"
@@ -20,12 +21,7 @@ export function AuthLayout(props: {
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center bg-bg px-4 py-10">
       <div className="mb-6 flex items-center gap-2.5">
-        <span
-          aria-hidden="true"
-          className="flex size-9 items-center justify-center rounded-lg bg-accent text-base font-bold text-accent-fg"
-        >
-          K
-        </span>
+        <BrandMark className="size-9 rounded-lg" />
         <span className="text-base font-semibold tracking-tight">Kervan Studio</span>
       </div>
       <Card className="w-full max-w-sm">
@@ -40,6 +36,7 @@ export function AuthLayout(props: {
           {props.children}
         </div>
       </Card>
+      <LogoCredit className="mt-6" />
     </div>
   )
 }
