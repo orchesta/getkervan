@@ -39,11 +39,11 @@ Read the [changelog](/changelog/) first. A project made with `pnpm try:new` from
 upgraded by creating it again from a newer clone.
 
 {{% published %}}
-Upgrade the packages together (during the 0.1 release candidate, by its `next` tag):
+Upgrade the packages together:
 
 ```sh {check="manual" reason="needs the packages on npm"}
-npm install @kervan/core@next @kervan/transport@next
-npm install --save-dev kervan@next
+npm install @kervan/core@latest @kervan/transport@latest
+npm install --save-dev kervan@latest
 npm test
 ```
 {{% /published %}}

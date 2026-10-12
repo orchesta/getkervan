@@ -5,17 +5,15 @@ servers. It is a thin layer over the official SDK (`@modelcontextprotocol/server
 tools, and Kervan handles validation, error masking, timeouts, transports and change
 notifications. Tools can also be declared in a `kervan.yaml` file, without code.
 
-> **Status: 0.1 release candidate.** The packages are on npm under the `next` tag
-> (`npm create kervan@next`, `npm install @kervan/core@next`); `0.1.0` follows under `latest`.
-> The API of 0.1 is listed in [docs/API.md](docs/API.md) with its stability.
+> **Status: 0.1.** The packages are on npm (`npm create kervan@latest`,
+> `npm install @kervan/core`). The API of 0.1 is listed in [docs/API.md](docs/API.md) with its stability.
 
 ## Quick start
 
-During the release candidate, name the `next` tag (a plain `npm create kervan` asks for
-`latest`). To build from source instead, see [Development](#development).
+To build from source instead, see [Development](#development).
 
 ```sh
-npm create kervan@next my-server
+npm create kervan@latest my-server
 cd my-server
 npm run dev      # hot reload, plus a REPL in the terminal
 npm test
@@ -46,7 +44,7 @@ app.tool("get_weather", {
 await serve(app) // stdio by default; --http for Streamable HTTP on 127.0.0.1:3000
 ```
 
-The same tool as a spec, served with `npx kervan@next run kervan.yaml`:
+The same tool as a spec, served with `npx kervan@latest run kervan.yaml`:
 
 ```yaml
 specVersion: 1
@@ -70,7 +68,7 @@ tools:
 Connect either one to an MCP client, for example Claude Code:
 
 ```sh
-claude mcp add weather -- npx kervan@next run /absolute/path/to/kervan.yaml
+claude mcp add weather -- npx kervan@latest run /absolute/path/to/kervan.yaml
 ```
 
 ## Packages
@@ -81,7 +79,7 @@ claude mcp add weather -- npx kervan@next run /absolute/path/to/kervan.yaml
 | [`@kervan/transport`](packages/transport) | stdio and Streamable HTTP on Node, a standard fetch handler (tested on Node), multi-tenant `resolveServer`, and `createTestClient`. |
 | [`@kervan/spec-runtime`](packages/spec-runtime) | `kervan.yaml` specs: HTTP tools with templates, JMESPath output selection, SSRF protection and secret redaction. |
 | [`kervan`](packages/cli) | The CLI: `kervan create`, `kervan dev` (hot reload, REPL), `kervan run`. |
-| [`create-kervan`](packages/create-kervan) | `npm create kervan@next`. |
+| [`create-kervan`](packages/create-kervan) | `npm create kervan@latest`. |
 
 Examples: [`weather`](examples/weather) (code), [`spec`](examples/spec) (`kervan.yaml`),
 [`dynamic`](examples/dynamic) (runtime changes and multi-tenancy).
@@ -143,7 +141,7 @@ ecosystem moves quickly.
 ## Development
 
 Requires Node.js 22.23.3 or a later 22.x, or 24.21.0 or later, and pnpm. To use the published
-release candidate instead, `npm create kervan@next my-server` (see [Quick start](#quick-start)).
+packages instead, `npm create kervan@latest my-server` (see [Quick start](#quick-start)).
 The source is at [github.com/orchesta/getkervan](https://github.com/orchesta/getkervan).
 
 ```sh
@@ -167,7 +165,7 @@ pnpm try:new <dir> # a new project from this repository's packages
 
 ### Trying a new project with the repository's packages
 
-`npm create kervan@next` installs the published packages. To try the repository's own code
+`npm create kervan@latest` installs the published packages. To try the repository's own code
 instead, one command creates a project from it: it builds the packages, runs `kervan create --no-install`, packs the
 local packages into the project's `.kervan-tarballs/` folder, installs them with npm and runs the
 project's tests.
@@ -178,7 +176,7 @@ cd ../my-server
 npm run dev
 ```
 
-To install from npm instead, use `npm create kervan@next my-server` (see [Quick start](#quick-start)).
+To install from npm instead, use `npm create kervan@latest my-server` (see [Quick start](#quick-start)).
 
 ## Contact
 

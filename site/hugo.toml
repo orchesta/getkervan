@@ -21,7 +21,7 @@ disableHugoGeneratorInject = true
   # The npm dist-tag the install commands name once published: "next" for a release candidate,
   # "latest" from 0.1.0. With published true, check:site requires it in every npm command and
   # asks the registry that each package has it.
-  npmTag = "next"
+  npmTag = "latest"
   # The source repository. A placeholder until it exists; `pnpm check:site --strict` fails on it.
   repoURL = "https://github.com/orchesta/getkervan"
   description = "Kervan turns a kervan.yaml spec into a working MCP server, or lets you write tools in TypeScript on the official MCP SDK. Optional self-hosted Studio."

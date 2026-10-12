@@ -223,8 +223,8 @@ hero) and at most two Studio screenshots in all.
 
 An npm install command in a code block while `params.published` is false is an error. Once it is
 true, every npm command that names a Kervan package must name `params.npmTag` too
-(`npm create kervan@next`, `npx kervan@next`, `npm install @kervan/core@next`); under `latest`
-the tag may be left out. And `check:site` then asks the npm registry (`registry.npmjs.org`, the
+(under `next`: `npm create kervan@next`, `npx kervan@next`, `npm install @kervan/core@next`);
+under `latest`, as now, the tag may be left out. And `check:site` then asks the npm registry (`registry.npmjs.org`, the
 abbreviated package document only) whether each of the five packages has that dist-tag: a missing
 package is an error, an unreachable registry a warning (an error with `--strict`). This keeps a
 post-publish change that is merged before the release from deploying install commands that fail.
@@ -260,8 +260,8 @@ WebP), `site:verify` measures about 89 KiB in the browser with the images it loa
   set it to `true` (the `post-publish/<version>` branch, merged after the release): the `install`
   and `connect-command` shortcodes switch to `npm create kervan@<npmTag>` and `npx
   kervan@<npmTag>`, and included READMEs get the tag too.
-- `params.npmTag`: the dist-tag those commands name: `next` for a release candidate, `latest`
-  from 0.1.0 (then the landing page and footer stop calling it a release candidate).
+- `params.npmTag`: the dist-tag those commands name: `latest` since 0.1.0, `next` for a release
+  candidate (then the landing page, the install text and the footer say so).
 - `params.repoURL`: a placeholder until the repository exists. Every "View source" link and every
   included README link uses it.
 
@@ -274,7 +274,7 @@ Every claim on the landing page, and what backs it. When a claim changes, change
 | Claim | Backed by |
 | --- | --- |
 | MIT licensed | `LICENSE`; `license.test.ts` checks every package has it |
-| Version 0.1 is a release candidate on npm, under the `next` tag (the hero's note, the footer) | the five packages' `next` dist-tag; `check:site` asks the registry while `params.published` is true |
+| Version 0.1 (the hero's line, the footer) | the five packages' `latest` dist-tag is 0.1.0; `check:site` asks the registry while `params.published` is true |
 | The hero: describe an HTTP API in YAML or write tools in TypeScript, and Kervan serves them as an MCP server | spec tools: `packages/spec-runtime` (the HTTP executor); code tools: `app.tool` in `packages/core`; serving: `packages/transport` and `kervan run`/`dev`; the home page's example is replayed in `site:verify --examples` |
 | Your AI client, such as Claude Code, can call it; "AI client" in the flow | any MCP client over stdio or Streamable HTTP; Claude Code is connected for real in `site:verify --examples --claude` (the connect guide) |
 | The flow: Kervan checks and limits each call; the tools go out over stdio or HTTP | the "Both kinds of tool" and "Timeouts, size limits, rate limits" rows below; `serve`/`serveHttp`/`toFetchHandler` in `packages/transport` |

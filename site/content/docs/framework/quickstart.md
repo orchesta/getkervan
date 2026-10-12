@@ -1,7 +1,7 @@
 ---
 title: Quickstart
 seoTitle: Kervan quickstart, run an MCP server in minutes
-description: Install Kervan's 0.1 release candidate from npm, create a TypeScript project, serve a kervan.yaml spec as an MCP server and call its tools from a REPL.
+description: Install Kervan from npm, create a TypeScript project, serve a kervan.yaml spec as an MCP server and call its tools from a REPL.
 lead: Create a project, serve a spec, call its tools. About ten minutes.
 weight: 10
 group: Start
@@ -44,7 +44,7 @@ API key needed). Save it as `kervan.yaml`:
 Then serve it over Streamable HTTP:
 
 ```sh {check="manual" reason="runs the published package; pnpm verify:published serves this spec the same way"}
-npx kervan@next run kervan.yaml --http
+npx kervan@latest run kervan.yaml --http
 ```
 
 ```text
@@ -61,7 +61,7 @@ example) uses. Stop it with Ctrl+C.
 `kervan dev` serves the same spec with hot reload and, in a terminal, the REPL:
 
 ```sh {check="manual" reason="runs the published package interactively"}
-npx kervan@next dev kervan.yaml
+npx kervan@latest dev kervan.yaml
 ```
 
 Type `tools`, then call one. The result is the real answer from Open-Meteo, so yours shows today's
@@ -91,13 +91,13 @@ scopes and checking the connection.
 ## Add Kervan to a project you have
 
 ```sh {check="manual" reason="needs a project of your own"}
-npm install @kervan/core@next @kervan/transport@next
-npm install --save-dev kervan@next
+npm install @kervan/core@latest @kervan/transport@latest
+npm install --save-dev kervan@latest
 ```
 
 ## From source
 
-To run the repository's latest code instead of the release candidate, build it from a clone (pnpm
+To run the repository's latest code instead of the published packages, build it from a clone (pnpm
 comes with Node.js through Corepack):
 
 {{< clone >}}

@@ -711,25 +711,27 @@ run("each check:site rule catches its problem", () => {
   })
 
   it("an npm command while the packages are not published", () => {
-    const withNpm = inMain(
-      page("changelog/index.html"),
-      '<pre tabindex="0" role="group" aria-label="sh code"><code>npm create kervan@latest my-server</code></pre>',
-    )
-    expect(newErrors({ "changelog/index.html": withNpm }, { published: false })).toEqual([
+    // The tag the site is built for (hugo.toml's npmTag), and the other one.
+    const tag = String(params.npmTag)
+    const other = tag === "latest" ? "next" : "latest"
+    // Added as a block of its own: the changelog's text names both tags.
+    const block = (code: string) =>
+      inMain(
+        page("changelog/index.html"),
+        `<pre tabindex="0" role="group" aria-label="sh code"><code>${code}</code></pre>`,
+      )
+    const withOther = block(`npm create kervan@${other} my-server`)
+    expect(newErrors({ "changelog/index.html": withOther }, { published: false })).toEqual([
       expect.stringContaining("shows an npm command (npm create kervan"),
     ])
-    // Published under a release candidate's tag (hugo.toml's npmTag, "next"): the command must
-    // name that tag, or it would install `latest`.
-    expect(newErrors({ "changelog/index.html": withNpm }, { published: true })).toEqual([
-      expect.stringContaining("kervan@latest should be kervan@next"),
+    // Published: a command that names another tag would install another release.
+    expect(newErrors({ "changelog/index.html": withOther }, { published: true })).toEqual([
+      expect.stringContaining(`kervan@${other} should be kervan@${tag}`),
     ])
-    const withTag = withNpm.replace("kervan@latest", "kervan@next")
+    const withTag = block(`npm create kervan@${tag} my-server`)
     expect(newErrors({ "changelog/index.html": withTag }, { published: true })).toEqual([])
     // Line by line: a block's other lines (here `kervan dev`, no npm) are not npm commands.
-    const twoLines = withTag.replace(
-      "npm create kervan@next my-server",
-      "kervan dev src/index.ts\nnpx kervan@next dev /abs/path/src/index.ts",
-    )
+    const twoLines = block(`kervan dev src/index.ts\nnpx kervan@${tag} dev /abs/path/src/index.ts`)
     expect(newErrors({ "changelog/index.html": twoLines }, { published: true })).toEqual([])
   })
 })
